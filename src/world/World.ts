@@ -68,11 +68,15 @@ export class World implements ObjectContainer {
         // this.addObject(new BlobShip(0x3333cc)); // adding this so the camera has an initial target, but how can we initialize the world with an empty arena?
         // i guess ideally we want a starting camera dimensions, with nothing on the field, then the ability to add a bunch of objects and only begin the simulation when we click go
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 1; i++) {
             this.addObject(new BigShip(0xcc3333));
             this.addObject(new BigShip(0x3333cc));
         }
 
+        for (let i = 0; i < 3; i++) {
+            this.addObject(new BlobShip(0xcc3333));
+            this.addObject(new BlobShip(0x3333cc));
+        }
     }
 
     createBackground() {

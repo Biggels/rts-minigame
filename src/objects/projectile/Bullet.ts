@@ -2,6 +2,7 @@ import * as Matter from "matter-js";
 import { Projectile } from "./Projectile";
 
 // TODO: add a damage value, and use that when collisions with ships happen
+// TODO: add a speed value, so big boy can have  slower bullets
 
 export class Bullet extends Projectile {
 

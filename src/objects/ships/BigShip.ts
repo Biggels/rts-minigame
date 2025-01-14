@@ -2,6 +2,8 @@
 // myShape.drawRect(0, 0, this.size, this.size)
 // myShape.drawRoundedRect(this.size, 0, this.size / 2, this.size / 2, 3)
 
+// TODO: give it slower speed in addition to the turnspeed
+
 import { Battler } from "./Battler";
 import * as Matter from 'matter-js';
 import { Projectile } from "../projectile/Projectile";
@@ -16,7 +18,7 @@ export class BigShip extends Battler {
     maxFuel = 60 * 5;
     maxHealth = 25;
     health = this.maxHealth;
-    fuel = 0;
+    fuel = this.maxFuel;
     size = 45;
     private framesSinceFired = 0;
     private framesSinceEvaded = 0;
@@ -50,7 +52,7 @@ export class BigShip extends Battler {
 
     shootBullets() {
         for (let i = 0; i <= 2 * Math.PI; i += Math.PI / 4) {
-            let bullet = new Bullet(this.team, 30, 6);
+            let bullet = new Bullet(this.team, 30, 12);
             this.shoot(bullet, i)
         }
     }
