@@ -6,7 +6,7 @@ function v(x: number, y: number) {
 }
 
 export abstract class PhysicsObject extends WorldObject {
-    
+
     get x() { return this.body.position.x; }
     get y() { return this.body.position.y; }
 
@@ -20,12 +20,15 @@ export abstract class PhysicsObject extends WorldObject {
     set vy(value) { Matter.Body.setVelocity(this.body, v(this.body.velocity.x, value)); }
 
     get direction() { return this.body.angle; };
-    set direction(value) { 
+    set direction(value) {
         while (value < -Math.PI) value += Math.PI * 2;
         if (value > Math.PI) value %= Math.PI * 2;
         Matter.Body.setAngle(this.body, value);
         this.g.rotation = value;
-    };  
+    };
+
+    get dx() { return Math.cos(this.direction); }
+    get dy() { return Math.sin(this.direction); }
 
     get decellerationFactor() { return this.body.frictionAir; }
     set decellerationFactor(value) { this.body.frictionAir = value; }

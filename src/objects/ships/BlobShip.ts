@@ -4,6 +4,7 @@ import { Projectile } from "../projectile/Projectile";
 import { Bullet } from "../projectile/Bullet";
 import { Sync } from "../../sync/Sync";
 
+// TODO: check dying speed, because it's really slow for this higher-health boy
 export class BlobShip extends Battler {
 
     fireInterval: number = 60 * 2;
@@ -16,8 +17,7 @@ export class BlobShip extends Battler {
     private framesSinceEvaded = 0;
 
     createBody(): Matter.Body {
-        // let body = Matter.Bodies.circle(this.g.x, this.g.y, this.size);
-        let body = Matter.Bodies.rectangle(this.g.x, this.g.y, this.size, this.size);
+        let body = Matter.Bodies.circle(this.g.x, this.g.y, this.size);
         return body;
     }
 
@@ -34,10 +34,8 @@ export class BlobShip extends Battler {
         }
         myShape.lineStyle(2, this.team / 2);
         myShape.beginFill(this.team);
-        // myShape.drawCircle(0, 0, this.size);
-        myShape.drawRect(0, 0, this.size, this.size)
-        // myShape.drawCircle(this.size, 0, 3);
-        myShape.drawRoundedRect(this.size, 0, this.size / 2, this.size / 2, 3)
+        myShape.drawCircle(0, 0, this.size);
+        myShape.drawCircle(this.size, 0, 3);
         myShape.endFill();
 
         return myShape;

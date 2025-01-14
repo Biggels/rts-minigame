@@ -20,15 +20,12 @@ export abstract class Battler extends PhysicsObject {
 
     // some sort of basic 'threat' that counts nearby enemies, and if it's high, they move toward nearest ally? or away from nearest enemy? when would that supercede chasing?
 
-    get dx() { return Math.cos(this.direction); }
-    get dy() { return Math.sin(this.direction); }
-
     constructor(team: number, size = 15) {
         super(); // do we need this when our parents are abstract classes?
         this.graphics = new Graphics();
         this.graphics = this.updateGraphics();
         this.team = team;
-        
+
         // should we assign positions randomly in the world instead of per battler, and should we try splitting the arena in 2 for each team?
         this.g.x = Sync.random.floatRange(-300, 300);
         this.g.y = Sync.random.floatRange(-200, 200);
@@ -37,12 +34,12 @@ export abstract class Battler extends PhysicsObject {
 
     abstract updateGraphics();
 
-    shoot(bullet: Projectile) {
+    shoot(bullet: Projectile, direction: number = this.direction) {
         this.world.addObject(bullet);
-        
-        let dx = this.dx;
-        let dy = this.dy;
-        
+
+        let dx = Math.cos(direction);
+        let dy = Math.sin(direction);
+
         bullet.x = this.x + this.size * dx;
         bullet.y = this.y + this.size * dy;
         bullet.vx = this.vx + dx * 10;
@@ -92,7 +89,7 @@ export abstract class Battler extends PhysicsObject {
             this.updateTarget();
         }
 
-        this.enemiesChasing = 
+        this.enemiesChasing =
             this.enemiesChasing.filter(e => e && e.isInWorld);
 
         if (this.health <= 0) {
